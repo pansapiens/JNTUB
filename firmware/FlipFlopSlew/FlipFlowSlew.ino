@@ -67,16 +67,11 @@ JNTUB::Stopwatch stopwatch;
 bool targetTwo;
 uint8_t prevVal;
 uint8_t targetVal;
-//uint16_t prevVal;
-//uint16_t targetVal;
 
 void setup()
 {
   JNTUB::setUpFastPWM();
-  // 10-bit PWM + analogWriteOutPrecise introduces too much high frequency from PWM, 
-  // even when JMP_AUDIO is removed to filter some high freq PWM artefacts.
-  // I didn't measure it but I suspect it's an audible lower harmonic of the 125kHz PWM (~15kHz).
-  //JNTUB::setUp10BitPWM();
+
   prevVal = 128;
   targetVal = 128;
   targetTwo = true;
@@ -93,11 +88,9 @@ void loop()
     if (targetTwo) {
       uint16_t oneRaw = analogRead(JNTUB::PIN_PARAM1);
       targetVal = map(oneRaw, 0, 1023, 0, 255);
-      //targetVal = oneRaw;
     } else {
        uint16_t twoRaw = analogRead(JNTUB::PIN_PARAM2);
       targetVal = map(twoRaw, 0, 1023, 0, 255);
-      //targetVal = twoRaw;
     }
     targetTwo = !targetTwo;
     stopwatch.reset();
@@ -108,12 +101,10 @@ void loop()
 
   if (slewTimeMs == 0 || timeSinceLastTrg >= slewTimeMs) {
     JNTUB::analogWriteOut(targetVal);
-    //JNTUB::analogWriteOutPrecise(targetVal);
   } else {
     // Continue slewing to target value
     uint8_t currentVal = map(
         timeSinceLastTrg, 0, slewTimeMs, prevVal, targetVal);
     JNTUB::analogWriteOut(currentVal);
-    //JNTUB::analogWriteOutPrecise(currentVal);
   }
 }
