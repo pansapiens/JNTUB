@@ -21,11 +21,11 @@ panelHeight = (3 * __oneU) - 4.85;  // 128.5, as per Doepfer guide
 panelInnerHeight = 110; // panelHeight - 18.5;
 
 // Doepfer panels aren't exactly multiples of 1HP (5.08mm) but have some rounding (usually -0.3 mm tolerance, rounded to the nearest tenth of a millimeter)
-panelWidth = 30.0; // [5.0:1HP, 9.80:2HP, 20.0:4HP, 30.0:6HP, 40.3:8HP, 50.5:10HP, 60.60:12HP, 70.8:14HP, 80.9:16HP, 91.3:18HP, 101.3:20HP, 106.3:21HP, 111.40:22HP, 141.90:28HP, 213.00:42HP]
+panelWidth = 20.0; // [5.0:1HP, 9.80:2HP, 20.0:4HP, 30.0:6HP, 40.3:8HP, 50.5:10HP, 60.60:12HP, 70.8:14HP, 80.9:16HP, 91.3:18HP, 101.3:20HP, 106.3:21HP, 111.40:22HP, 141.90:28HP, 213.00:42HP]
 panelThickness = 2.0;
 hole_width = __oneHP + 2;
 // Doepfer uses 7.5mm - can be less
-hole_xinset = 7.5;
+hole_xinset = 3.5;
 // Doepfer uses 3mm so holes line up with 3U rail spacing - after testing, I've found this needs to be 2mm
 hole_yinset = 2.0;
 
@@ -51,6 +51,14 @@ led3mmRoundHoleWidth = 1.6;
 // Square/rectangular LED hole, WxH - default is for a 5x2mm rectangular face [5.2, 2.2] is a little too tight without post-processing
 ledSquareHole = [5.4, 2.4];
 
+
+// If 3D printing, this can be tuned based on the layer height
+// (eg 0.6 is 3 layers for a typical 0.2mm layer height - you might
+//  want to change this to 0.4 or 0.2mm, especially if you are doing
+//  two color faceplaces with a filament change)
+//textEmbossDepth=0.6;
+textEmbossDepth=0.4;
+    
 /* [PoCoBrick] */
 
 // Units that may be compatible with your favorite plastic brick format
@@ -214,10 +222,10 @@ module panelText() {
     smallFontSize=4;
     largeFontSize=18;
     textYOffset=120;
-    embossDepth=0.6;
+    textEmbossDepth=0.6;
     rotate([0, 0, 90]) {
-        translate([panelWidth/2, -12, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -12, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("JNTUB", size=4, 
                      font="Arial:style=Bold", 
                      spacing=0.9, 
@@ -225,8 +233,8 @@ module panelText() {
             }
         }
         
-        translate([panelWidth/2, -25, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -25, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("3      ", size=6, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
@@ -234,8 +242,8 @@ module panelText() {
             }
         }
         
-        translate([panelWidth/2, -45.5, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -45.5, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("2      ", size=6, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
@@ -243,8 +251,8 @@ module panelText() {
             }
         }
         
-        translate([panelWidth/2, -66, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -66, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("1      ", size=6, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
@@ -252,16 +260,16 @@ module panelText() {
             }
         }
         
-        translate([panelWidth/2, -89.5, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -89.5, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("trig           ", size=3, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
                      halign = "center", $fn=32);
             }
         }
-        translate([panelWidth/2, -91, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -91, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("    →", size=6, 
                      font="Consolas:style=Bold", 
                      spacing=0.6, 
@@ -269,8 +277,8 @@ module panelText() {
             }
         }
         
-        translate([(panelWidth/2)-0.25, -77, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([(panelWidth/2)-0.25, -77, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("1      2", size=4, 
                      font="Arial:style=Bold", 
                      spacing=0.87, 
@@ -278,24 +286,24 @@ module panelText() {
             }
         }
         
-        translate([panelWidth/2, -103, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -103, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("out      ", size=4, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
                      halign = "center", $fn=32);
             }
         }
-        translate([panelWidth/2, -104, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -104, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("   →", size=6, 
                      font="Consolas:style=Bold", 
                      spacing=0.6, 
                      halign = "center", $fn=32);
             }
         }
-        translate([panelWidth/2, -118.5, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -118.5, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("           sig", size=3.5, 
                      font="Arial:style=Bold", 
                      spacing=0.8, 
@@ -312,16 +320,15 @@ module panelText() {
     smallFontSize=4;
     largeFontSize=18;
     textYOffset=120;
-    embossDepth=0.6;
     //titleFont="Source Code Pro:style=Light";
     titleFont="Rubik:style=Bold";
     //titleFont="Rubik:style=Regular";
     //titleFont="Arial:style=Bold";
     
     rotate([0, 0, 90]) {
-        translate([(panelWidth/2)+4, -4, panelThickness-embossDepth+0.01]) {
+        translate([(panelWidth/2)+4, -4, panelThickness-textEmbossDepth+0.01]) {
             rotate([0, 0, -90])
-            linear_extrude(embossDepth) {
+            linear_extrude(textEmbossDepth) {
                 text("JNTUB", size=10, 
                      font=titleFont, 
                      spacing=1.2, 
@@ -332,8 +339,8 @@ module panelText() {
         }
         
         /** Param pots **/
-        translate([panelWidth/2, -22.8, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -22.8, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("≡   ", size=12, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
@@ -342,8 +349,8 @@ module panelText() {
                      $fn=32);
             }
         }
-        translate([panelWidth/2, -44.2, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -44.2, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("=   ", size=12, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
@@ -352,8 +359,8 @@ module panelText() {
                      $fn=32);
             }
         }
-        translate([panelWidth/2, -65, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -65, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("−   ", size=12, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
@@ -365,8 +372,8 @@ module panelText() {
         /***************************/
         
         /*
-        translate([(panelWidth/2), -78, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([(panelWidth/2), -78, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("∙ ∙∙", size=16, 
                      font="Arial:style=Bold", 
                      spacing=0.68, 
@@ -378,8 +385,8 @@ module panelText() {
         */
         
         /** CV inputs **/
-        translate([panelWidth/2, -83.8, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -83.8, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("−   ", size=12, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
@@ -388,8 +395,8 @@ module panelText() {
                      $fn=32);
             }
         }
-        translate([panelWidth/2, -83.2, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -83.2, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("   =", size=12, 
                      font="Arial:style=Bold", 
                      spacing=1, 
@@ -398,18 +405,18 @@ module panelText() {
                      $fn=32);
             }
         }
-        translate([(panelWidth/2)-3.6, -72, panelThickness-embossDepth+0.01]) {
+        translate([(panelWidth/2)-3.6, -72, panelThickness-textEmbossDepth+0.01]) {
             rotate([0, 0, -15])
-            linear_extrude(embossDepth) {
+            linear_extrude(textEmbossDepth) {
                 text("⇣", size=10, 
                      font="Code2003:style=Bold", 
                      spacing=1, 
                      halign = "center", $fn=32);
             }
         }
-        translate([(panelWidth/2) + 6, -74.8, panelThickness-embossDepth+0.01]) {
+        translate([(panelWidth/2) + 6, -74.8, panelThickness-textEmbossDepth+0.01]) {
             rotate([0, 0, -15])
-            linear_extrude(embossDepth) {
+            linear_extrude(textEmbossDepth) {
                 text("⇓", size=10, 
                      font="Code2003:style=Bold", 
                      spacing=1, 
@@ -419,16 +426,16 @@ module panelText() {
         /*******************/
         
         /* Trigger input and ditto */
-        translate([(panelWidth/2) - 5, -99.4, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([(panelWidth/2) - 5, -99.4, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("⎍", size=8, 
                      font="Code2003:style=Bold", 
                      spacing=0.95, 
                      halign = "center", $fn=32);
             }
         }
-        translate([panelWidth/2 - 3, -95, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2 - 3, -95, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("→", size=12, 
                      font="Consolas:style=Bold", 
                      spacing=0.6, 
@@ -437,8 +444,8 @@ module panelText() {
                      $fn=32);
             }
         }
-        translate([panelWidth/2 +4, -95, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2 +4, -95, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("→", size=12, 
                      font="Consolas:style=Bold", 
                      spacing=0.6, 
@@ -447,8 +454,8 @@ module panelText() {
                      $fn=32);
             }
         }
-        translate([-4, -95, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([-4, -95, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("→", size=12, 
                      font="Consolas:style=Bold", 
                      spacing=0.6, 
@@ -461,9 +468,9 @@ module panelText() {
         
         
         /** Outputs **/
-        translate([5, -115.8, panelThickness-embossDepth+0.01]) {
+        translate([5, -115.8, panelThickness-textEmbossDepth+0.01]) {
             rotate([0, 0, 90])
-            linear_extrude(embossDepth) {
+            linear_extrude(textEmbossDepth) {
                 text("⇜", size=10, 
                      font="Code2003:style=Bold", 
                      spacing=0.6, 
@@ -472,9 +479,9 @@ module panelText() {
                      $fn=32);
             }
         }
-        translate([panelWidth - 5, -109, panelThickness-embossDepth+0.01]) {
+        translate([panelWidth - 5, -109, panelThickness-textEmbossDepth+0.01]) {
             rotate([0, 0, -90])
-            linear_extrude(embossDepth) {
+            linear_extrude(textEmbossDepth) {
                 text("⇝", size=10, 
                      font="Code2003:style=Bold", 
                      spacing=0.6, 
@@ -483,8 +490,8 @@ module panelText() {
                      $fn=32);
             }
         }
-        translate([panelWidth/2, -109.6, panelThickness-embossDepth+0.01]) {
-            linear_extrude(embossDepth) {
+        translate([panelWidth/2, -109.6, panelThickness-textEmbossDepth+0.01]) {
+            linear_extrude(textEmbossDepth) {
                 text("−", size=12, 
                      font="Arial:style=Bold", 
                      spacing=0.95, 
